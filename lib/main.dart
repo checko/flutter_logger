@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_logger/file_logger.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 Future<String> _getDocsDir() async {
   final directory = await getExternalStorageDirectory();
@@ -79,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+    Lager.log("$_counter");
   }
 
   @override
