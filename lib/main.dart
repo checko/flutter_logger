@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_logger/file_logger.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 Future<String> _getDocsDir() async {
-  final directory = await getApplicationDocumentsDirectory();
+  final directory = await getExternalStorageDirectory();
   return directory.path;
 }
 
@@ -12,9 +13,10 @@ var _logFilename = 'back_to_now.txt';
 
 
 void main() async {
-
+  WidgetsFlutterBinding.ensureInitialized();
   var docsDir = await _getDocsDir();
   String canonFilename = '$docsDir/$_logFilename';
+  print(canonFilename);
   await Lager.initializeLogging(canonFilename);
   await Lager.log('ENTERED main() ...');
   runApp(MyApp());
