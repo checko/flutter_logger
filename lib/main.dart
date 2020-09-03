@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 
-void main() {
+import 'package:flutter_logger/file_logger.dart';
+import 'package:path_provider/path_provider.dart';
+
+Future<String> _getDocsDir() async {
+  final directory = await getApplicationDocumentsDirectory();
+  return directory.path;
+}
+
+var _logFilename = 'back_to_now.txt';
+
+
+void main() async {
+
+  var docsDir = await _getDocsDir();
+  String canonFilename = '$docsDir/$_logFilename';
+  await Lager.initializeLogging(canonFilename);
+  await Lager.log('ENTERED main() ...');
   runApp(MyApp());
 }
 
